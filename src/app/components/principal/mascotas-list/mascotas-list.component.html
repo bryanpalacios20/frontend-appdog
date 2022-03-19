@@ -1,0 +1,54 @@
+<link rel="stylesheet" [href]="sanitizer.bypassSecurityTrustResourceUrl(cssUrl)">
+<app-header></app-header>
+
+<div class="container" style="margin-top: 70px;margin-bottom: 70px;">
+    
+   <h1 class="py-5">Agregar mascota</h1>
+   <div class=" mb-5">
+        <form  #formularioMascota ="ngForm" >
+
+            <div class="mb-3">
+            <label class="form-label" >Ingrese el nombre de mascota</label>
+                <input type="text" class="form-control" name="nombre" [(ngModel)]="mascotaModel.nombre">
+            </div>
+
+            <div class="mb-3">
+            <label class="form-label">Tipo de mascota</label>
+                <input type="text" class="form-control" name="tipo" [(ngModel)]="mascotaModel.tipo">
+            </div>
+
+            <button  class="btn btn-primary" (click)="savePets()">Registrar</button>
+            <button  class="btn btn-primary mx-3" (click)="updatePet()" >Editar</button>
+        </form>
+   </div> 
+    <h1 class="py-4">Listado de mascotas </h1>
+    <div class="d-flex justify-content-center ">
+      <div class="w-75 ">
+        <table class="table ">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Tipo</th>
+                <th scope="col" width=15%>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>     
+              <tr *ngFor="let mas of mascotas;let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{mas.id}}</td>
+                <td>{{mas.nombre}}</td>
+                <td>{{mas.tipo}}</td>
+                <td class="">
+                  <a class="btn btn-outline-danger btn-sm mx-2" [routerLink]="['/listado/edit', mas.id,mas.nombre,mas.tipo]"><i class="far fa-edit"></i>  </a>
+                  <a class="btn btn-outline-danger btn-sm " (click)="DeletePet(mas.id)"><i class="far fa-trash-alt"></i>  </a></td>  
+              </tr>
+            </tbody>
+        </table>
+      </div>
+      </div>
+</div>
+
+<!-- FOOTER -->
+<app-footer></app-footer>
